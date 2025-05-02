@@ -45,6 +45,8 @@ class _SetupScreenState extends State<SetupScreen> {
       appBar: AppBar(
         title: const Text('Configuration'),
         elevation: 0,
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -63,7 +65,7 @@ class _SetupScreenState extends State<SetupScreen> {
                     'Players',
                     _playerCount.toString(),
                     Icons.people,
-                    AppTheme.accentColor,
+                    Colors.deepPurple,
                     () => _showNumberSelector(
                       'Players',
                       _playerCount,
@@ -76,7 +78,7 @@ class _SetupScreenState extends State<SetupScreen> {
                     'Spies',
                     _spyCount.toString(),
                     Icons.visibility,
-                    AppTheme.secondaryColor,
+                    Colors.indigo,
                     () => _showNumberSelector(
                       'Spies',
                       _spyCount,
@@ -89,7 +91,7 @@ class _SetupScreenState extends State<SetupScreen> {
                     'Timer',
                     '$_timerMinutes min',
                     Icons.timer,
-                    AppTheme.secondaryColor,
+                    Colors.purple,
                     () => _showNumberSelector(
                       'Timer (minutes)',
                       _timerMinutes,
@@ -102,7 +104,7 @@ class _SetupScreenState extends State<SetupScreen> {
                     'Themes',
                     _themeCount.toString(),
                     Icons.category,
-                    AppTheme.accentColor,
+                    Colors.deepPurpleAccent,
                     () => _showNumberSelector(
                       'Theme Count',
                       _themeCount,
@@ -114,55 +116,120 @@ class _SetupScreenState extends State<SetupScreen> {
                 ],
               ),
               const SizedBox(height: 24),
-              const Text(
-                'Player Names',
-                style: AppTheme.subheadingStyle,
-              ),
-              const SizedBox(height: 16),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: _playerCount,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 12.0),
-                    child: TextField(
-                      controller: _nameControllers[index],
-                      style: const TextStyle(
-                        color: AppTheme.textColor,
-                        fontSize: 16,
-                      ),
-                      decoration: InputDecoration(
-                        labelText: 'Player ${index + 1}',
-                        labelStyle: const TextStyle(
-                          color: AppTheme.textSecondaryColor,
-                          fontSize: 14,
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.person_outline,
+                          color: Colors.deepPurple,
+                          size: 24,
                         ),
-                        filled: true,
-                        fillColor: AppTheme.cardColor,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: AppTheme.accentColor,
-                            width: 2,
+                        const SizedBox(width: 8),
+                        const Text(
+                          'Player Names',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepPurple,
                           ),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 16,
-                        ),
-                      ),
+                      ],
                     ),
-                  );
-                },
+                    const SizedBox(height: 16),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: _playerCount,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 12.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[50],
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: Colors.grey[200]!,
+                                width: 1,
+                              ),
+                            ),
+                            child: TextField(
+                              controller: _nameControllers[index],
+                              style: const TextStyle(
+                                color: Colors.black87,
+                                fontSize: 16,
+                              ),
+                              decoration: InputDecoration(
+                                labelText: 'Player ${index + 1}',
+                                labelStyle: const TextStyle(
+                                  color: Colors.deepPurple,
+                                  fontSize: 14,
+                                ),
+                                prefixIcon: Container(
+                                  width: 40,
+                                  height: 40,
+                                  margin: const EdgeInsets.only(right: 8),
+                                  decoration: BoxDecoration(
+                                    color: Colors.deepPurple.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '${index + 1}',
+                                      style: const TextStyle(
+                                        color: Colors.deepPurple,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                prefixIconConstraints: const BoxConstraints(
+                                  minWidth: 40,
+                                  minHeight: 40,
+                                ),
+                                filled: true,
+                                fillColor: Colors.transparent,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide.none,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: const BorderSide(
+                                    color: Colors.deepPurple,
+                                    width: 2,
+                                  ),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 24),
               SizedBox(
@@ -170,8 +237,21 @@ class _SetupScreenState extends State<SetupScreen> {
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () => _navigateToThemeSelection(),
-                  style: AppTheme.primaryButtonStyle,
-                  child: const Text('PLAY'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 2,
+                  ),
+                  child: const Text(
+                    'PLAY',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
@@ -195,6 +275,13 @@ class _SetupScreenState extends State<SetupScreen> {
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: color.withOpacity(0.3),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -202,7 +289,7 @@ class _SetupScreenState extends State<SetupScreen> {
           children: [
             Icon(
               icon,
-              color: AppTheme.textColor,
+              color: Colors.white,
               size: 32,
             ),
             const SizedBox(height: 8),
@@ -211,7 +298,7 @@ class _SetupScreenState extends State<SetupScreen> {
               style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: AppTheme.textColor,
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 4),
@@ -219,7 +306,7 @@ class _SetupScreenState extends State<SetupScreen> {
               title,
               style: const TextStyle(
                 fontSize: 14,
-                color: AppTheme.textColor,
+                color: Colors.white,
               ),
             ),
           ],
@@ -237,7 +324,7 @@ class _SetupScreenState extends State<SetupScreen> {
   ) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppTheme.cardColor,
+      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
