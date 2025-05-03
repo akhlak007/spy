@@ -299,6 +299,13 @@ class _SetupScreenState extends State<SetupScreen> {
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
+                shadows: [
+                  Shadow(
+                    offset: Offset(1, 1),
+                    blurRadius: 2,
+                    color: Colors.black26,
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 4),
@@ -307,6 +314,13 @@ class _SetupScreenState extends State<SetupScreen> {
               style: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
+                shadows: [
+                  Shadow(
+                    offset: Offset(1, 1),
+                    blurRadius: 2,
+                    color: Colors.black26,
+                  ),
+                ],
               ),
             ),
           ],
@@ -324,7 +338,7 @@ class _SetupScreenState extends State<SetupScreen> {
   ) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
